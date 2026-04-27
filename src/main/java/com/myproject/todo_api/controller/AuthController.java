@@ -1,6 +1,5 @@
 package com.myproject.todo_api.controller;
 
-import com.myproject.todo_api.domain.User;
 import com.myproject.todo_api.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +22,17 @@ public class AuthController {
         return ResponseEntity.ok("회원가입 성공!");
     }
 
-    // 요청 데이터 형식 (email, password를 JSON으로 받아요)
+    // 로그인 API - POST /auth/login
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        // UserService에서 로그인 처리 후 JWT 토큰 받아서 반환
+        String token = userService.login(request.email(), request.password());
+        return ResponseEntity.ok(token);
+    }
+
+    // 회원가입 요청 형식
     record RegisterRequest(String email, String password) {}
+
+    // 로그인 요청 형식
+    record LoginRequest(String email, String password) {}
 }

@@ -6,13 +6,13 @@ JWT 인증 기반 할 일 관리 REST API 서버
 - Java 25
 - Spring Boot 3.5
 - Spring Security
-- JWT
+- JWT (jjwt 0.11.5)
 - JPA / Hibernate
 - MySQL
 
 ## ✅ 구현 기능
 - [x] 회원가입 (비밀번호 BCrypt 암호화)
-- [ ] 로그인 (JWT 토큰 발급)
+- [x] 로그인 (JWT 토큰 발급)
 - [ ] 할 일 생성
 - [ ] 할 일 조회
 - [ ] 할 일 수정
@@ -30,6 +30,19 @@ JWT 인증 기반 할 일 관리 REST API 서버
   "password": "1234"
 }
 ```
+- Response: `회원가입 성공!`
+
+### 로그인
+- Method: `POST`
+- URL: `/auth/login`
+- Request Body:
+```json
+{
+  "email": "test@test.com",
+  "password": "1234"
+}
+```
+- Response: `eyJhbGci...` (JWT 토큰)
 
 ## 🚀 실행 방법
 1. MySQL 실행 후 `todo_db` 데이터베이스 생성

@@ -31,13 +31,15 @@ jobs:
           target: "/home/ubuntu"
 
       - name: 서버 실행
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            pkill -f 'todo-api' || true
-            sleep 2
-            mv /home/ubuntu/target/todo-api-0.0.1-SNAPSHOT.jar /home/ubuntu/todo-api-0.0.1-SNAPSHOT.jar
-            nohup java -jar /home/ubuntu/todo-api-0.0.1-SNAPSHOT.jar > /home/ubuntu/app.log 2>&1 &
+          uses: appleboy/ssh-action@v1.0.3
+          with:
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USERNAME }}
+            key: ${{ secrets.EC2_SSH_KEY }}
+            request_pty: false
+            script: |
+              pkill -f 'todo-api' || true
+              sleep 2
+              mv /home/ubuntu/target/todo-api-0.0.1-SNAPSHOT.jar /home/ubuntu/todo-api-0.0.1-SNAPSHOT.jar || true
+              nohup java -jar /home/ubuntu/todo-api-0.0.1-SNAPSHOT.jar > /home/ubuntu/app.log 2>&1 </dev/null &
+              disown

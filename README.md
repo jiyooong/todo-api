@@ -81,3 +81,7 @@ JWT 인증 기반 할 일 관리 REST API 서버
 1. MySQL 실행 후 `todo_db` 데이터베이스 생성
 2. `application.properties` 에서 DB 설정 확인
 3. 프로젝트 실행 후 `http://localhost:8080` 으로 접속
+
+## 🌐 배포 주소
+- API 서버: `http://15.164.221.190:8080`
+- Swagger UI: `http://15.164.221.190:8080/swagger-ui/index.html`
